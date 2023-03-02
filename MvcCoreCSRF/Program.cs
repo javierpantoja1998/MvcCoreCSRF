@@ -1,6 +1,12 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -19,6 +25,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+//Antes de mapear hay que decirle que usamos session
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
