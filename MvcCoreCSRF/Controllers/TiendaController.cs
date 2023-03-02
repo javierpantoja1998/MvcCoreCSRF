@@ -16,5 +16,27 @@ namespace MvcCoreCSRF.Controllers
             }
             
         }
+
+        [HttpPost]
+        public IActionResult Productos(string direccion, string[] producto)
+        {
+            if(HttpContext.Session.GetString("USUARIO") == null)
+            {
+                return RedirectToAction("AccesoDenegado", "Managed");
+            }
+            else
+            {
+                TempData["PRODUCTOS"] = producto;
+                TempData["DIRECCION"] = direccion;
+                return RedirectToAction("PedidoFinal");
+            }
+        }
+
+        public IActionResult PedidoFinal()
+        {
+            string[] productos = TempData["PRODUCTOS"] as string[];
+            ViewData["DIRECCION"] = TempData["DIRECCION"].ToString();
+            return View(productos);
+        }
     }
 }

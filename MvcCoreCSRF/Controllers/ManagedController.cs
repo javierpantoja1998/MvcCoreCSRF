@@ -4,7 +4,7 @@ namespace MvcCoreCSRF.Controllers
 {
     public class ManagedController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Login()
         {
             return View();
         }

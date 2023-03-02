@@ -1,0 +1,10 @@
+﻿@model string[]
+
+<h1 style="color:antiquewhite">PEDIDO FINAL</h1>
+<h1 style="color:aquamarine">Direccion de envio: @ViewData["DIRECCION"]</h1>
+<ul class="list-group">
+    @foreach(string prod in Model)
+    {
+        <li class="list-group-item">@prod</li>
+    }
+</ul>
